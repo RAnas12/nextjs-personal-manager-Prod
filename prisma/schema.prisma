@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Todos {
+  id          String   @id @default(cuid())
+  userId      String
+  task        String?
+  isCompleted Boolean?
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  password      String?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  workouts      Workout[]
+
+  // accounts      Account[]
+  // sessions      Session[]
+}
+
+// can add categorie
+model Workout {
+  id        String     @id @default(cuid())
+  name      String
+  User      User?      @relation(fields: [userId], references: [id])
+  userId    String?
+  Exercises Exercise[]
+}
+
+model Exercise {
+  id                  String            @id @default(cuid())
+  apiId               String
+  isCompleted         Boolean           @default(false)
+  set                 Int               @default(0)
+  rep                 Int               @default(0)
+  weight              Decimal           @default(0)
+  breakTimeBetweenSet Int               @default(0)
+  ExerciseHistory     ExerciseHistory[]
+  Workout             Workout?          @relation(fields: [workoutId], references: [id])
+  workoutId           String
+
+  @@unique([apiId, workoutId])
+}
+
+model ExerciseHistory {
+  completedDate       DateTime  @default(now())
+  duration            Int       @default(0)
+  set                 Int       @default(0)
+  rep                 Int       @default(0)
+  weight              Decimal   @default(0)
+  breakTimeBetweenSet Int       @default(0)
+  Exercise            Exercise? @relation(fields: [exerciseId], references: [id])
+  exerciseId          String
+
+  @@id([completedDate, exerciseId])
+}
