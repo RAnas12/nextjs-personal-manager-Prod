@@ -44,11 +44,19 @@ model Exercise {
   isCompleted         Boolean           @default(false)
   set                 Int               @default(0)
   rep                 Int               @default(0)
-  weight              Decimal           @default(0)
+  weight              Float             @default(0)
   breakTimeBetweenSet Int               @default(0)
+  name                String
+  category            String?
+  img                 String?
+  description         String?
+  muscle              String?
+  muscleSecondary     String?
+  equipement          String?
   ExerciseHistory     ExerciseHistory[]
-  Workout             Workout?          @relation(fields: [workoutId], references: [id])
-  workoutId           String
+
+  Workout   Workout? @relation(fields: [workoutId], references: [id])
+  workoutId String
 
   @@unique([apiId, workoutId])
 }

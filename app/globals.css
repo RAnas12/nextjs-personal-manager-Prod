@@ -2,26 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: #00072d;
+  background: #eef7ee;
+}
+input {
+  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight mb-2;
+}
+input.unmodifiable {
+  @apply bg-inherit shadow-none border-none text-xl text-slate-950 font-bold;
+}
+input:focus {
+  @apply outline-none;
+}
+label {
+  @apply block text-gray-700 text-sm font-bold mb-2;
+}
+h1 {
+  @apply text-xl text-slate-950 font-bold;
+}
+text {
+  @apply bg-slate-500;
+}
+button {
+  @apply text-white bg-indigo-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2;
+}
+button.btn-delete {
+  @apply text-white bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2;
+}
+
+.bg-color-base {
+  background: #eef7ee;
+}
+
+.bg-color-secondary {
+  @apply bg-slate-200;
 }
