@@ -11,6 +11,12 @@ export default async function Home() {
         <pre>{JSON.stringify(session)}</pre>
         <h2>Client Call</h2>
       </div>
+      <input
+        type="checkbox"
+        id="checkbox"
+        className="w-10 h-10"
+        checked={true}
+      />
 
       {/* // <User /> */}
     </main>

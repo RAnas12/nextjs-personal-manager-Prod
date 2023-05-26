@@ -5,9 +5,15 @@ export async function POST(req: NextRequest) {
   const { name, userId } = await req.json();
 
   if (!name)
-    return NextResponse.json({ message: "The workout do not have a name" });
+    return NextResponse.json(
+      { message: "The workout do not have a name" },
+      { status: 400 }
+    );
   if (!userId)
-    return NextResponse.json({ message: "Error with the user information" });
+    return NextResponse.json(
+      { message: "Error with the user information" },
+      { status: 400 }
+    );
 
   const workout = await prisma.workout.create({
     data: {
@@ -22,9 +28,15 @@ export async function PUT(req: NextRequest) {
   const { name, id } = await req.json();
 
   if (!name)
-    return NextResponse.json({ message: "The workout do not have a name" });
+    return NextResponse.json(
+      { message: "The workout do not have a name" },
+      { status: 400 }
+    );
   if (!id)
-    return NextResponse.json({ message: "Error with the workout information" });
+    return NextResponse.json(
+      { message: "Error with the workout information" },
+      { status: 400 }
+    );
 
   const workout = await prisma.workout.update({
     where: {

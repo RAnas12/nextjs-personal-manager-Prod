@@ -7,16 +7,16 @@ body {
   background: #eef7ee;
 }
 input {
-  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight mb-2;
+  @apply shadow appearance-none border rounded w-full py-2  text-lg text-slate-950 leading-tight my-1;
 }
 input.unmodifiable {
-  @apply bg-inherit shadow-none border-none text-xl text-slate-950 font-bold;
+  @apply bg-inherit shadow-none border-none text-lg text-slate-950 font-semibold;
 }
 input:focus {
   @apply outline-none;
 }
 label {
-  @apply block text-gray-700 text-sm font-bold mb-2;
+  @apply block text-gray-700 text-sm font-bold;
 }
 h1 {
   @apply text-xl text-slate-950 font-bold;
