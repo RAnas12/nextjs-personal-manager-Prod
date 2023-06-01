@@ -23,7 +23,7 @@ export default async function Home({ params }: { params: Params }) {
           exercisesInWorkout={exercises}
         ></AddExercise>
       </div>
-      <div className="grid grid-cols-1  justify-items-center  gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="flex flex-col">
         {exercises.map((exercise) => (
           <ExerciseCard key={exercise.id} exercise={exercise}></ExerciseCard>
         ))}

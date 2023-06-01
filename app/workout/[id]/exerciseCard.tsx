@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Exercise } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import Timer from "./timer";
 
 export default function ExerciseCard({ exercise }: { exercise: Exercise }) {
   const [isUpdating, setIsUpdating] = useState(false);
@@ -74,106 +75,20 @@ export default function ExerciseCard({ exercise }: { exercise: Exercise }) {
 
   return (
     <>
-      <div className="min-w-min max-w-xs rounded-md overflow-hidden shadow-lg bg-color-secondary">
-        <div className="">
-          <img
-            src="https://tecdn.b-cdn.net/img/new/fluid/city/113.webp"
-            className="w-full rounded-md "
-            alt="Louvre"
-          ></img>
-        </div>
-
-        <div className="px-2 pt-2">
+      <div className="grid grid-cols-5 mt-4 rounded-md overflow-hidden shadow-lg bg-color-secondary">
+        <div className="col-span-3 md:col-span-4 px-2 pt-2 text-center bg-slate-400">
           <p className="text-gray-700 text-base">N:{exercise.name}</p>
-        </div>
-        <div className="px-2 pt-2">
           <p className="text-gray-700 text-base">
             Categorie:{exercise.category}
           </p>
         </div>
-        <div className="flex items-center px-2">
-          <label className="w-2/5">Set:</label>
-          <input
-            className={inputClassName}
-            disabled={isUpdating ? false : true}
-            onChange={(e) => setSet(Number(e.target.value))}
-            name="set"
-            placeholder=""
-            type="number"
-            min={0}
-            value={set}
-          ></input>
-        </div>
-        <div className="flex items-center px-2">
-          <label className="w-2/5">Rep:</label>
-          <input
-            className={inputClassName}
-            disabled={isUpdating ? false : true}
-            onChange={(e) => setRep(Number(e.target.value))}
-            name="rep"
-            placeholder=""
-            type="number"
-            min={0}
-            value={rep}
-          ></input>
-        </div>
-        <div className="flex items-center px-2">
-          <label className="w-2/5">Weight:</label>
-          <input
-            className={inputClassName}
-            disabled={isUpdating ? false : true}
-            onChange={(e) => setWeight(e.target.value)}
-            name="weight"
-            placeholder=""
-            type="number"
-            min={0}
-            step={0.25}
-            value={weight}
-          ></input>
-        </div>
 
-        <div className="flex items-center px-2">
-          <label className="w-2/5">break time:</label>
-
-          {isUpdating ? (
-            <div className="flex w-full">
-              <input
-                type="number"
-                onChange={(e) => setBreakTimeMin(Number(e.target.value))}
-                name="breakTimeMin"
-                placeholder="Min"
-                min={0}
-                max={59}
-                value={breakTimeMin}
-              ></input>
-              <span className="w-fit text-xl text-slate-950 font-bold py-2">
-                :
-              </span>
-              <input
-                type="number"
-                onChange={(e) => setBreakTimeSec(Number(e.target.value))}
-                name="breakTimeSec"
-                placeholder="Sec"
-                min={0}
-                max={60}
-                value={breakTimeSec}
-              ></input>
-            </div>
-          ) : (
-            <span className="text-lg text-slate-950 font-semibold py-2">
-              {breakTime}
-            </span>
-          )}
-        </div>
-
-        <div className="flex justify-between px-2">
-          <button onClick={removeExerciseFromWorkout} className="btn-delete">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              className="w-5 h-5"
-            >
+        <div className="col-span-2 md:col-span-1 h-full py-2 flex justify-end bg-slate-400">
+          <button
+            onClick={removeExerciseFromWorkout}
+            className="btn-delete h-full"
+          >
+            <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
               <path
                 fillRule="evenodd"
                 d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.52.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z"
@@ -181,17 +96,10 @@ export default function ExerciseCard({ exercise }: { exercise: Exercise }) {
               />
             </svg>
           </button>
-          <button onClick={() => setIscompleted(!isCompleted)}>
-            {isCompleted ? "uncompleted" : "completed"}
-          </button>
-          <button onClick={handleUpdateName}>
+
+          <button onClick={handleUpdateName} className=" h-full">
             {isUpdating ? (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                className="w-3 h-3"
-              >
+              <svg viewBox="0 0 20 20" fill="currentColor" className="w-3 h-3">
                 <path
                   fillRule="evenodd"
                   d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
@@ -210,6 +118,111 @@ export default function ExerciseCard({ exercise }: { exercise: Exercise }) {
               </svg>
             )}
           </button>
+        </div>
+
+        <div className="col-span-5 md:col-span-1 flex h-full items-center ml-2">
+          <img
+            src="https://tecdn.b-cdn.net/img/new/fluid/city/113.webp"
+            className="max-h-full max-w-full h-auto w-auto rounded-md "
+            alt="Louvre"
+          ></img>
+        </div>
+
+        <div className="col-span-5 md:col-span-1 ">
+          <div className="flex items-center px-2 ">
+            <label className="w-3/6">Set:</label>
+            <input
+              className={inputClassName}
+              disabled={isUpdating ? false : true}
+              onChange={(e) => setSet(Number(e.target.value))}
+              name="set"
+              placeholder=""
+              type="number"
+              min={0}
+              value={set}
+            ></input>
+          </div>
+          <div className="flex items-center px-2">
+            <label className="w-3/6">Rep:</label>
+            <input
+              className={inputClassName}
+              disabled={isUpdating ? false : true}
+              onChange={(e) => setRep(Number(e.target.value))}
+              name="rep"
+              placeholder=""
+              type="number"
+              min={0}
+              value={rep}
+            ></input>
+          </div>
+          <div className="flex items-center px-2">
+            <label className="w-3/6">Weight:</label>
+            <input
+              className={inputClassName}
+              disabled={isUpdating ? false : true}
+              onChange={(e) => setWeight(e.target.value)}
+              name="weight"
+              placeholder=""
+              type="number"
+              min={0}
+              step={0.25}
+              value={weight}
+            ></input>
+          </div>
+          <div className="flex items-center px-2">
+            <label className="w-3/6">break time:</label>
+
+            {isUpdating ? (
+              <div className="flex w-full">
+                <input
+                  type="number"
+                  onChange={(e) => setBreakTimeMin(Number(e.target.value))}
+                  name="breakTimeMin"
+                  placeholder="Min"
+                  min={0}
+                  max={59}
+                  value={breakTimeMin}
+                ></input>
+                <span className="w-fit text-xl text-slate-950 font-bold py-2">
+                  :
+                </span>
+                <input
+                  type="number"
+                  onChange={(e) => setBreakTimeSec(Number(e.target.value))}
+                  name="breakTimeSec"
+                  placeholder="Sec"
+                  min={0}
+                  max={60}
+                  value={breakTimeSec}
+                ></input>
+              </div>
+            ) : (
+              <span className="text-lg text-slate-950 font-semibold py-2 w-full">
+                {breakTime}
+              </span>
+            )}
+          </div>
+        </div>
+
+        <div className="col-span-5 md:col-span-2">
+          <Timer></Timer>
+        </div>
+
+        <div className="col-span-5  md:col-span-1 md:px-2 flex  md:items-center md:justify-end ">
+          <div className="flex p-2 w-full md:block  md:w-fit md:justify-end">
+            <button
+              className="w-full"
+              onClick={() => setIscompleted(!isCompleted)}
+            >
+              Start
+            </button>
+            <button
+              className="w-full"
+              onClick={() => setIscompleted(!isCompleted)}
+            >
+              {isCompleted ? "uncompleted" : "completed"}
+            </button>
+          </div>
         </div>
       </div>
     </>
