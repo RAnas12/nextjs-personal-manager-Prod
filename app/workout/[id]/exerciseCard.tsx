@@ -14,6 +14,7 @@ export default function ExerciseCard({ exercise }: { exercise: Exercise }) {
   const [breakTime, setBreakTime] = useState("");
   const [breakTimeMin, setBreakTimeMin] = useState(0);
   const [breakTimeSec, setBreakTimeSec] = useState(0);
+  const [startTimer, setStartTimer] = useState(false);
 
   const router = useRouter();
   let inputClassName = isUpdating ? "" : "unmodifiable";
@@ -205,16 +206,16 @@ export default function ExerciseCard({ exercise }: { exercise: Exercise }) {
         </div>
 
         <div className="col-span-5 md:col-span-2">
-          <Timer></Timer>
+          <Timer breakDuration={20} isStarted={startTimer}></Timer>
         </div>
 
         <div className="col-span-5  md:col-span-1 md:px-2 flex  md:items-center md:justify-end ">
           <div className="flex p-2 w-full md:block  md:w-fit md:justify-end">
             <button
               className="w-full"
-              onClick={() => setIscompleted(!isCompleted)}
+              onClick={() => setStartTimer(!startTimer)}
             >
-              Start
+              {startTimer ? "Stop" : "Start"}
             </button>
             <button
               className="w-full"

@@ -38,3 +38,26 @@ button.btn-delete {
 .bg-color-secondary {
   @apply bg-slate-200;
 }
+
+.outer_circle {
+  position: relative;
+  margin: 50px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: red;
+  display: grid;
+  place-items: center;
+}
+
+.inner_circle {
+  background: black;
+
+  border-radius: inherit;
+}
+/*  <div>
+      <div style={{ fontSize: "36px" }}>Time Left: {timeLeft}s</div>
+      <div className="outer_circle">
+        <div className="inner_circle">{timeLeft}</div>
+      </div>
+    </div> */
